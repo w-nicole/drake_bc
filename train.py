@@ -1,29 +1,52 @@
 
-from model import mlp.MLP as MLP
+from model import mlp
 import config
+import load_data
 
 import pytorch_lightning as pl
+from pytorch_lightning.callbacks import ModelCheckpoint
 import argparse
+import os
+import pandas as pd
 
 def main(parser):
-    args = vars(parser)
-    model = MLP(**args)
-    run_name = model.get_logging_name()
-    run_path = os.path.join(config.EXPERIMENT_PATH, run_name)
-    trainer = pl.Trainer(
-        default_root_dir = run_path
-    )
-    pl.loggers.Wandblogger(name=run_name, dir=run_path, save_dir = run_path)
+    raw_args = parser.parse_args()
+    args = vars(raw_args)
+    model = mlp.MLP(**args)
     
-    df = pd.DataFrame.from_pickle(config.DATA_PATH)
-    train_dataloader = load_data.get_phase_dataloader(df, 'train')
-    val_dataloader = load_data.get_phase_dataloader(df, 'val')
+    run_name = model.get_run_name()
+    run_path = os.path.join(config.EXPERIMENT_PATH, run_name)
+    if not os.path.exists(run_path): os.makedirs(run_path)
+    
+    logger = pl.loggers.WandbLogger(
+        name=run_name,
+        project=config.WANDB_NAME,
+        save_dir = run_path
+    )
+    
+    checkpoint_callback = ModelCheckpoint(
+        monitor='val_loss', mode='min',
+        save_top_k=1,
+        dirpath = os.path.join(run_path, logger.version)
+    )
+
+    trainer = pl.Trainer(
+        logger = logger,
+        default_root_dir = run_path,
+        max_epochs = args['number_of_epochs'],
+        log_every_n_steps = args['logging_step'],
+        callbacks=[checkpoint_callback]
+    )
+    
+    df = pd.read_pickle(config.SPLIT_DATA_PATH)
+    train_dataloader = model.get_phase_dataloader(df, 'train')
+    val_dataloader = model.get_phase_dataloader(df, 'val')
     
     trainer.fit(model, train_dataloader, val_dataloader)
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser = MLP.add_arguments(parser)
+    parser = mlp.MLP.add_arguments(parser)
     main(parser)
     
     
