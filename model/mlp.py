@@ -61,13 +61,13 @@ class MLP(pl.LightningModule):
     
     @classmethod
     def add_arguments(cls, parser):
-        parser.add_argument('--input_size', type=int, default=config.NUMBER_OF_JOINTS)
+        parser.add_argument('--input_size', type=int, default=config.config.NUMBER_OF_EFFECTOR_ELEMENTS)
         parser.add_argument('--output_size', type=int, default=config.NUMBER_OF_EFFECTOR_ELEMENTS)
         parser.add_argument('--lr', type=float, default=1e-3)
         parser.add_argument('--number_of_epochs', type=int, default=1)
-        parser.add_argument('--logging_step', type=int, default=1)
+        parser.add_argument('--logging_step', type=int, default=1) 
         parser.add_argument('--batch_size', type=float, default=512)
-        parser.add_argument('--hidden_size', type=int, default=8)
+        parser.add_argument('--hidden_size', type=int, default=2)
         parser.add_argument('--number_of_hidden_layers', type=int, default=1)
         return parser
         

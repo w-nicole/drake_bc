@@ -1,6 +1,6 @@
 
 SEED = 0 
-NUMBER_OF_JOINTS = 7
+NUMBER_OF_JOINTS = 3
 NUMBER_OF_EFFECTOR_ELEMENTS = 3
 EXPERIMENT_PATH = './experiments'
 # RAW_DATA_PATH = './data/raw_poses.pkl'
