@@ -3,10 +3,11 @@ SEED = 0
 NUMBER_OF_JOINTS = 3
 NUMBER_OF_EFFECTOR_ELEMENTS = 3
 EXPERIMENT_PATH = './experiments'
-# RAW_DATA_PATH = './data/raw_poses.pkl'
-# SPLIT_DATA_PATH = './data/split_poses.pkl'
-RAW_DATA_PATH = './data/dummy.pkl'
-SPLIT_DATA_PATH = './data/split_dummy.pkl'
+
+DATA_PATH = './data'
+SINGLE_CIRCLE_NAME = 'single_circle'
+RETURN_TO_POINT_NAME = 'return_to_point'
+
 WANDB_NAME = 'drake-bc'
 
 EVAL_PERCENTAGE = .2
