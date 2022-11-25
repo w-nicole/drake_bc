@@ -62,4 +62,4 @@ if __name__ == '__main__':
         df = pd.read_pickle(read_path)
         split_df = split_data(df, split_attribute)
         split_df.to_pickle(read_path)
-        print(f'Split dataframe written to: {write_path}')
+        print(f'Split dataframe written to: {read_path}')
