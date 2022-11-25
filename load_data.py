@@ -7,8 +7,8 @@ class PoseDataset(Dataset):
     
     def __init__(self, raw_df, phase):
         # Remove every final timestep so that there are no out-of-bounds next indices.
-        max_timestep = max(df['timestep'])
-        unique_max_timesteps = set(list(df.groupby('trajectory_index').agg(np.max)['timestep']))
+        max_timestep = max(raw_df['timestep'])
+        unique_max_timesteps = set(list(raw_df.groupby('trajectory_index').agg(np.max)['timestep']))
         if not {max_timestep} == unique_max_timesteps:
             import pdb; pdb.set_trace()
         without_last_step_df = raw_df[raw_df.timestep != max_timestep].copy()

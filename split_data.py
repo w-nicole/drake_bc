@@ -39,10 +39,7 @@ def split_data(unfiltered_df, split_attribute):
         number_in_phase = phase_index_pool.shape[0]
         if not max_phase_index == number_in_phase:
             import pdb; pdb.set_trace()
-        
-    write_path = os.path.join(config.DATA_PATH, f'split_{modifier}.pkl')
-    split_df.to_pickle(write_path)
-    print(f'Split dataframe written to: {write_path}')
+
     return split_df
     
 def get_phase_from_index(index, in_phase_sets):
@@ -58,9 +55,11 @@ if __name__ == '__main__':
     
     to_split = {
         config.SINGLE_CIRCLE_NAME : 'pose_index',
-        config.RETURN_TO_POINT_NAME : 'trajectory_index'
+        #config.RETURN_TO_POINT_NAME : 'trajectory_index'
     }
     for modifier, split_attribute in to_split.items():
-        read_path = os.path.join(config.DATA_PATH, f'dummy_{modifier}.pkl')
+        read_path = os.path.join(config.DATA_PATH, f'{modifier}_poses.pkl')
         df = pd.read_pickle(read_path)
-        split_data(df, split_attribute)
+        split_df = split_data(df, split_attribute)
+        split_df.to_pickle(read_path)
+        print(f'Split dataframe written to: {write_path}')

@@ -10,9 +10,9 @@ from torch.utils.data import DataLoader
 
 class MLP(pl.LightningModule):
     
-    def __init__(self, lr, batch_size, input_size, output_size, hidden_size, number_of_hidden_layers, **args):
+    def __init__(self, case, lr, batch_size, input_size, output_size, hidden_size, number_of_hidden_layers, **args):
         super().__init__()
-        
+        assert case in config.cases
         self.lr = lr
         self.batch_size = batch_size
         self.hidden_size = hidden_size
@@ -61,7 +61,8 @@ class MLP(pl.LightningModule):
     
     @classmethod
     def add_arguments(cls, parser):
-        parser.add_argument('--input_size', type=int, default=config.config.NUMBER_OF_EFFECTOR_ELEMENTS)
+        parser.add_argument('--case', type=str, default='')
+        parser.add_argument('--input_size', type=int, default=config.NUMBER_OF_EFFECTOR_ELEMENTS)
         parser.add_argument('--output_size', type=int, default=config.NUMBER_OF_EFFECTOR_ELEMENTS)
         parser.add_argument('--lr', type=float, default=1e-3)
         parser.add_argument('--number_of_epochs', type=int, default=1)
