@@ -26,15 +26,30 @@ def mark_test_single_circle(raw_df):
     
     raw_df['is_test'] = is_test
     return raw_df
+
+def mark_test_diff_init(raw_df, center):
+    
+    outside_bounds = lambda starting_point, center : np.linalg.norm(starting_point - center) >= config.DIFF_INIT_RADIUS
+    is_test = list(map(
+        lambda position : outside_bounds(np.array(position), center),
+        raw_df['end_effector_position']
+    ))
+    raw_df['is_test'] = is_test
+    return raw_df
+    
     
 if __name__ == '__main__':
     
     to_split = {
-        config.SINGLE_CIRCLE_NAME : mark_test_single_circle,
-        #config.RETURN_TO_POINT_NAME : mark_test_return_to_point
+        #config.SINGLE_CIRCLE_NAME : mark_test_single_circle,
+        config.DIFF_INIT_NAME : mark_test_diff_init
+    }
+    args_for_split = {
+        #config.SINGLE_CIRCLE_NAME : tuple(),
+        config.DIFF_INIT_NAME : (np.load(os.path.join(config.DATA_PATH, f'{config.DIFF_INIT_NAME}_center.npy')),),
     }
     for modifier, mark_function in to_split.items():
         read_path = os.path.join(config.DATA_PATH, f'{modifier}_poses.pkl')
         raw_df = pd.read_pickle(read_path)
-        raw_df = mark_function(raw_df)
+        raw_df = mark_function(*((raw_df,) + args_for_split[modifier]))
         raw_df.to_pickle(read_path)

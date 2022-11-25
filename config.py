@@ -5,9 +5,10 @@ EXPERIMENT_PATH = './experiments'
 
 DATA_PATH = './data'
 SINGLE_CIRCLE_NAME = 'single_circle'
-RETURN_TO_POINT_NAME = 'return_to_point'
+DIFF_INIT_NAME = 'dummy_diff_init'
+DIFF_INIT_RADIUS = 5
 
-cases = [SINGLE_CIRCLE_NAME, RETURN_TO_POINT_NAME]
+cases = [SINGLE_CIRCLE_NAME, DIFF_INIT_NAME]
 
 WANDB_NAME = 'drake-bc'
 

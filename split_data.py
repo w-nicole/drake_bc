@@ -55,7 +55,7 @@ if __name__ == '__main__':
     
     to_split = {
         config.SINGLE_CIRCLE_NAME : 'pose_index',
-        #config.RETURN_TO_POINT_NAME : 'trajectory_index'
+        #config.DIFF_INIT : 'trajectory_index'
     }
     for modifier, split_attribute in to_split.items():
         read_path = os.path.join(config.DATA_PATH, f'{modifier}_poses.pkl')
