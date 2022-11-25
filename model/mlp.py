@@ -13,6 +13,7 @@ class MLP(pl.LightningModule):
     def __init__(self, case, lr, batch_size, input_size, output_size, hidden_size, number_of_hidden_layers, **args):
         super().__init__()
         assert case in config.cases
+        self.case = case
         self.lr = lr
         self.batch_size = batch_size
         self.hidden_size = hidden_size
@@ -65,7 +66,7 @@ class MLP(pl.LightningModule):
         parser.add_argument('--input_size', type=int, default=config.NUMBER_OF_EFFECTOR_ELEMENTS)
         parser.add_argument('--output_size', type=int, default=config.NUMBER_OF_EFFECTOR_ELEMENTS)
         parser.add_argument('--lr', type=float, default=1e-3)
-        parser.add_argument('--number_of_epochs', type=int, default=1)
+        parser.add_argument('--number_of_epochs', type=int, default=1000)
         parser.add_argument('--logging_step', type=int, default=1) 
         parser.add_argument('--batch_size', type=float, default=512)
         parser.add_argument('--hidden_size', type=int, default=2)
@@ -73,7 +74,7 @@ class MLP(pl.LightningModule):
         return parser
         
     def get_run_name(self):
-        return f'lr={self.lr},hsize={self.hidden_size},layers={self.number_of_hidden_layers}'
+        return f'case={self.case},lr={self.lr},hsize={self.hidden_size},layers={self.number_of_hidden_layers}'
         
         
         

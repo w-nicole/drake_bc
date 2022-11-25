@@ -20,15 +20,15 @@ class PoseDataset(Dataset):
         self.indices = list(indexable_df.pose_index)
                 
     def __getitem__(self, raw_index):
-        try:
-            index = self.indices[raw_index]
-            entry = self.df.iloc[index]
-            next_entry = self.df.iloc[index + 1]
-            assert entry.phase == self.phase
-            assert entry.pose_index == index
-            assert next_entry['trajectory_index'] == entry['trajectory_index']
-            return torch.Tensor(entry.end_effector_position), torch.Tensor(next_entry.end_effector_position)
-        except: import pdb; pdb.set_trace()
+        
+        index = self.indices[raw_index]
+        entry = self.df.iloc[index]
+        next_entry = self.df.iloc[index + 1]
+        assert entry.phase == self.phase
+        assert entry.pose_index == index
+        assert next_entry['trajectory_index'] == entry['trajectory_index']
+        return torch.Tensor(entry.end_effector_position), torch.Tensor(next_entry.end_effector_position)
+
     
     def __len__(self):
         return len(self.indices)
