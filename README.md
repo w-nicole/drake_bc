@@ -21,5 +21,5 @@ Then to train each of the cases, run:
 `
 python3 train.py --case CASE
 `
-where `CASE` is one of `{single_circle,return_to_point}`
+where `CASE` is one of `{single_circle,diff_init}`
 

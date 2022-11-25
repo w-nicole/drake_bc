@@ -41,11 +41,11 @@ def mark_test_diff_init(raw_df, center):
 if __name__ == '__main__':
     
     to_split = {
-        #config.SINGLE_CIRCLE_NAME : mark_test_single_circle,
+        config.SINGLE_CIRCLE_NAME : mark_test_single_circle,
         config.DIFF_INIT_NAME : mark_test_diff_init
     }
     args_for_split = {
-        #config.SINGLE_CIRCLE_NAME : tuple(),
+        config.SINGLE_CIRCLE_NAME : tuple(),
         config.DIFF_INIT_NAME : (np.load(os.path.join(config.DATA_PATH, f'{config.DIFF_INIT_NAME}_center.npy')),),
     }
     for modifier, mark_function in to_split.items():

@@ -5,7 +5,7 @@ EXPERIMENT_PATH = './experiments'
 
 DATA_PATH = './data'
 SINGLE_CIRCLE_NAME = 'single_circle'
-DIFF_INIT_NAME = 'dummy_diff_init'
+DIFF_INIT_NAME = 'diff_init'
 DIFF_INIT_RADIUS = 5
 
 cases = [SINGLE_CIRCLE_NAME, DIFF_INIT_NAME]

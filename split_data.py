@@ -54,8 +54,8 @@ def get_phase_from_index(index, in_phase_sets):
 if __name__ == '__main__':
     
     to_split = {
-        config.SINGLE_CIRCLE_NAME : 'pose_index',
-        #config.DIFF_INIT : 'trajectory_index'
+        #config.SINGLE_CIRCLE_NAME : 'pose_index',
+        config.DIFF_INIT_NAME : 'trajectory_index'
     }
     for modifier, split_attribute in to_split.items():
         read_path = os.path.join(config.DATA_PATH, f'{modifier}_poses.pkl')
