@@ -12,14 +12,17 @@ pip3 install pandas wandb scikit-learn
 `
 Running these out of order may or may not yield package conflicts in conda.
 
-Then, run `TODO.ipynb` to get the raw data pairs (two .pkl files, one .npy file). Put them in a folder called "data" inside the repository folder. Then, prepare the data:
+Then, run `TODO.ipynb` to get the raw data pairs (two .pkl files, one .npy file).
+Put them in a folder called "data_raw" inside the repository folder. Then, for the rest of the instructions, the variable `CASE` indicates one of `{single_circle,diff_init}`.
+
+For a single set of analyses, run the following to prepare that data:
 
 `
-python3 add_is_test.py; python3 split_data.py
+chmod u+x prepare_data.sh
+./prepare_data.sh
 `
-Then to train each of the cases, run:
+Then to train for it:
 `
 python3 train.py --case CASE
 `
-where `CASE` is one of `{single_circle,diff_init}`
 
