@@ -30,6 +30,7 @@ def mark_test_single_circle(raw_df):
 
 def mark_test_diff_init(raw_df):
     
+    # Identify out-distribution test set
     initial_positions = list(raw_df[raw_df.timestep == 0].end_effector_position)
     check_center_same_list = [initial_positions[index] == initial_positions[0] for index in range(len(initial_positions))]
     if not all(check_center_same_list):
@@ -43,7 +44,23 @@ def mark_test_diff_init(raw_df):
         raw_df['end_effector_position']
     ))
     raw_df['is_out_split'] = is_out_split
-    return raw_df
+    
+    # Reverse trajectories so that the final position is always the same
+    reversed_dfs = []
+    for trajectory_index in range(np.max(raw_df.trajectory_index)):
+        current_df = raw_df[raw_df.trajectory_index == trajectory_index].copy()
+        # To get the dataset to load the trajectories in reverse order,
+        # need to redo the pose index,
+        # and also redoing entries for natural reading.
+        # 11/26/22: https://www.geeksforgeeks.org/how-to-reverse-row-in-pandas-dataframe/
+        # Line for reversing dataframes adapted from above
+        reversed_df = current_df.loc[::-1]
+        reversed_df['pose_index'] = list(current_df.pose_index)
+        reversed_df['timestep'] = list(current_df.timestep)
+        reversed_dfs.append(reversed_df)
+    
+    new_df = pd.concat(reversed_dfs)
+    return new_df
     
     
 if __name__ == '__main__':
