@@ -3,10 +3,15 @@ SEED = 0
 NUMBER_OF_EFFECTOR_ELEMENTS = 3
 EXPERIMENT_PATH = './experiments'
 
-DATA_PATH = './data'
+DATA_RAW_PATH = './data_raw'
+DATA_PROCESSED_PATH = './data_processed'
 SINGLE_CIRCLE_NAME = 'single_circle'
-DIFF_INIT_NAME = 'dummy_diff_init'
-DIFF_INIT_RADIUS = 0.1
+DIFF_INIT_NAME = 'diff_init'
+# below: got this by manually re-splitting until test_out was ~10% of the data
+DIFF_INIT_RADIUS = 0.325
+
+# length in steps
+DIFF_INIT_TRAJECTORY_LENGTH = 10
 
 cases = [SINGLE_CIRCLE_NAME, DIFF_INIT_NAME]
 

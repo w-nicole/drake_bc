@@ -73,7 +73,7 @@ if __name__ == '__main__':
     modifier = args.case
     split_attribute = to_split[modifier]
 
-    read_path = os.path.join(config.DATA_PATH, f'{modifier}_poses.pkl')
+    read_path = os.path.join(config.DATA_PROCESSED_PATH, f'{modifier}_poses.pkl')
     df = pd.read_pickle(read_path)
     split_df = split_data(df, split_attribute)
     split_df.to_pickle(read_path)
