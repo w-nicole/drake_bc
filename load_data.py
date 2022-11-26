@@ -10,14 +10,16 @@ class PoseDataset(Dataset):
         self.df = df
         self.phase = phase
         
+        indexable_df = self.get_indexable_df()
+        self.indices = list(indexable_df.pose_index)
+        
+    def get_indexable_df(self):
         # Effectively remove every final timestep so that there are no out-of-bounds next indices.
-        max_timestep = max(df['timestep'])
-        unique_max_timesteps = set(list(df.groupby('trajectory_index').agg(np.max)['timestep']))
+        max_timestep = max(self.df['timestep'])
+        unique_max_timesteps = set(list(self.df.groupby('trajectory_index').agg(np.max)['timestep']))
         if not {max_timestep} == unique_max_timesteps:
             import pdb; pdb.set_trace()
-
-        indexable_df = df[(df.phase == phase) & (df.timestep != max_timestep)]
-        self.indices = list(indexable_df.pose_index)
+        return self.df[(self.df.phase == self.phase) & (self.df.timestep != max_timestep)].copy()
                 
     def __getitem__(self, raw_index):
         

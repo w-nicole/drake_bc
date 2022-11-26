@@ -25,6 +25,8 @@ EVAL_PERCENTAGES = {
 
 PHASES = ['train', 'val', 'test_in', 'test_out']
 
+ANALYSIS_PATH = './analysis'
+
 import torch
 import numpy as np
 import random
