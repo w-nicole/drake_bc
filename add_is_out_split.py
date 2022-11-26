@@ -31,8 +31,10 @@ def mark_test_single_circle(raw_df):
 def mark_test_diff_init(raw_df):
     
     # Identify out-distribution test set
-    initial_positions = list(raw_df[raw_df.timestep == 0].end_effector_position)
-    check_center_same_list = [initial_positions[index] == initial_positions[0] for index in range(len(initial_positions))]
+    # 11/26/22: https://davidamos.dev/the-right-way-to-compare-floats-in-python/
+    # for comparison of floats
+    initial_positions = list(raw_df[np.isclose(raw_df.timestep, 0)].end_effector_position)
+    check_center_same_list = [np.all(np.isclose(initial_positions[index], initial_positions[0])) for index in range(len(initial_positions))]
     if not all(check_center_same_list):
         import pdb; pdb.set_trace()
     
