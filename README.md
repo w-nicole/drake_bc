@@ -12,7 +12,7 @@ pip3 install pandas wandb scikit-learn
 `
 Running these out of order may or may not yield package conflicts in conda.
 
-Then, run `TODO.ipynb` to get the raw data pairs. Then, prepare the data:
+Then, run `TODO.ipynb` to get the raw data pairs (two .pkl files, one .npy file). Put them in a folder called "data" inside the repository folder. Then, prepare the data:
 
 `
 python3 add_is_test.py; python3 split_data.py

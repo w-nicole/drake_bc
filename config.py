@@ -5,15 +5,20 @@ EXPERIMENT_PATH = './experiments'
 
 DATA_PATH = './data'
 SINGLE_CIRCLE_NAME = 'single_circle'
-DIFF_INIT_NAME = 'diff_init'
-DIFF_INIT_RADIUS = 5
+DIFF_INIT_NAME = 'dummy_diff_init'
+DIFF_INIT_RADIUS = 0.1
 
 cases = [SINGLE_CIRCLE_NAME, DIFF_INIT_NAME]
 
 WANDB_NAME = 'drake-bc'
 
-EVAL_PERCENTAGE = .2
-PHASES = ['train', 'val', 'test']
+EVAL_PERCENTAGES = {
+    'val' : 0.1,
+    'test_in' : 0.1,
+    'test_out' : 0.1
+} 
+
+PHASES = ['train', 'val', 'test_in', 'test_out']
 
 import torch
 import numpy as np
