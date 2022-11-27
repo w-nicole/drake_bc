@@ -32,3 +32,6 @@ chmod u+x phase_2.sh
 
 ./phase_2.sh
 ```
+
+For the demonstrations, move the previously generated raw data to `data_raw`. Then, make a folder called `data_processed` and put the split there. Then, run `nn_controller_sim_v2` for the respective case in the code, and screen record the Meshcat demonstrations.
+

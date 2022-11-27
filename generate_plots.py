@@ -55,6 +55,10 @@ def get_MSE_against_closest_sector_end(df, complete_df, save_path):
     else:
         assert False, 'No positions adjacent to test_out found, data probably ill-formed.'
     
+    # Resize figure
+    # 11/27/22 : https://www.geeksforgeeks.org/change-plot-size-in-matplotlib-python/
+    figure = plt.figure(figsize=(8, 5))
+    
     plt.xlabel('MSE to closest sector point')
     plt.ylabel('MSE to true end effector position')
     plt.title('Distance to sector ends vs. MSE')
