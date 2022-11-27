@@ -35,13 +35,11 @@ chmod u+x phase_2.sh
 
 For the demonstrations:
 
+(NEED TO UPDATE THIS AFTER DEMO IS SORTED OUT)
+
 - In Deepnote, move the previously generated raw data to `data_raw`.
 
 - Then, make a folder called `data_processed` and put the split dataframes there.
-
-- Make another folder called `reformatted_models`, and put in and name the respective reformatted `.pt` models `diff_init.pt` and `single_circle.pt`.
-
-- Save the `model/mlp.py` file and place it in Deepnote under that path.
 
 - Then, run `nn_controller_sim_v2` for the respective case in the code.
 
