@@ -8,7 +8,7 @@ conda install -c conda-forge pytorch-lightning
 `
 Then, and only then, run:
 `
-pip3 install pandas wandb scikit-learn
+pip3 install pandas wandb scikit-learn matplotlib
 `
 Running these out of order may or may not yield package conflicts in conda.
 
