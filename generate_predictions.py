@@ -53,6 +53,7 @@ def get_predictions(model, case):
         if not all(np.all(np.isclose(reference_input, as_list_input)) for reference_input, as_list_input in zip(reference_inputs, inputs_as_lists)):
             import pdb; pdb.set_trace()
         current_split_df['prediction'] = predictions_as_lists
+        current_split_df['label'] = reference_inputs
         prediction_dfs[modifier] = current_split_df
     
     return prediction_dfs
