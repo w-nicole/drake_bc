@@ -60,10 +60,6 @@ def get_predictions(model, case):
 
 if __name__ == '__main__':
     
-    # Current checkpoints
-    # ./experiments/case=diff_init,lr=0.001,hsize=2,layers=1/3rse0ghe/epoch=1999-step=2000.ckpt
-    # ./experiments/case=single_circle,lr=0.001,hsize=2,layers=1/3lz4lnt2/epoch=1999-step=2000.ckpt
-    
     parser = argparse.ArgumentParser()
     parser.add_argument('--checkpoint_path', type=str, default='')
     args = parser.parse_args()
