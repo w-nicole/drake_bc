@@ -41,6 +41,8 @@ For the demonstrations:
 
 - Make another folder called `reformatted_models`, and put in and name the respective reformatted `.pt` models `diff_init.pt` and `single_circle.pt`.
 
+- Save the `model/mlp.py` file and place it in Deepnote under that path.
+
 - Then, run `nn_controller_sim_v2` for the respective case in the code.
 
 - Screen record the Meshcat demonstrations.
