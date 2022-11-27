@@ -18,17 +18,17 @@ Put the resulting .pkl files in a folder called `data_raw` inside the repository
 
 For data processing and training, run the following to prepare that data:
 
-`
+```
 chmod u+x phase_1.sh
 
 ./phase_1.sh
-`
+```
 
 If running on a different checkpoint than the ones saved to Github, edit phase_2 accordingly.
 
 For the analyses:
-`
+```
 chmod u+x phase_2.sh
 
 ./phase_2.sh
-`
+```
