@@ -38,7 +38,7 @@ def main(parser):
         callbacks=[checkpoint_callback]
     )
     
-    df = pd.read_pickle(os.path.join(config.DATA_PATH, f'{args["case"]}_poses.pkl'))
+    df = pd.read_pickle(os.path.join(config.DATA_PROCESSED_PATH, f'{args["case"]}_poses.pkl'))
     train_dataloader = model.get_phase_dataloader(df, 'train')
     val_dataloader = model.get_phase_dataloader(df, 'val')
     

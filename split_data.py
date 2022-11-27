@@ -8,16 +8,24 @@ from collections import defaultdict
 import pandas as pd
 import numpy as np
 import os
+import argparse
 
 import config
 
 # Single circle trajectory
 def split_data(unfiltered_df, split_attribute):
     
-    test_indices = np.array(list(set(unfiltered_df[unfiltered_df.is_test][split_attribute])))
-    train_val_pool = np.array(list(set(list(unfiltered_df[~unfiltered_df.is_test][split_attribute]))))
-    train_indices, val_indices = sklearn.model_selection.train_test_split(train_val_pool, test_size = config.EVAL_PERCENTAGE, random_state = config.SEED)
-    phase_indices_list = [train_indices, val_indices, test_indices]
+    test_out_indices = np.array(list(set(unfiltered_df[unfiltered_df.is_out_split][split_attribute])))
+    in_pool = np.array(list(set(list(unfiltered_df[~unfiltered_df.is_out_split][split_attribute]))))
+    
+    # 'test_out' eval percentage only applies to the single-circle case.
+    test_in_size = int(config.EVAL_PERCENTAGES['test_in'] * in_pool.shape[0])
+    val_size = int(config.EVAL_PERCENTAGES['val'] * in_pool.shape[0])
+    
+    train_val_indices, test_in_indices = sklearn.model_selection.train_test_split(in_pool, test_size = test_in_size, random_state = config.SEED)
+    train_indices, val_indices = sklearn.model_selection.train_test_split(train_val_indices, test_size = val_size, random_state = config.SEED)
+    
+    phase_indices_list = [train_indices, val_indices, test_in_indices, test_out_indices]
     in_phase_sets = { phase : set(phase_indices.tolist()) for phase, phase_indices in zip(config.PHASES, phase_indices_list) }
     
     split_df = unfiltered_df.copy()
@@ -53,13 +61,20 @@ def get_phase_from_index(index, in_phase_sets):
 
 if __name__ == '__main__':
     
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--case', type=str, default='')
+    args = parser.parse_args()
+    
     to_split = {
-        #config.SINGLE_CIRCLE_NAME : 'pose_index',
-        config.DIFF_INIT_NAME : 'trajectory_index'
+        config.SINGLE_CIRCLE_NAME : 'pose_index',
+        config.DIFF_INIT_NAME : 'pose_index'
     }
-    for modifier, split_attribute in to_split.items():
-        read_path = os.path.join(config.DATA_PATH, f'{modifier}_poses.pkl')
-        df = pd.read_pickle(read_path)
-        split_df = split_data(df, split_attribute)
-        split_df.to_pickle(read_path)
-        print(f'Split dataframe written to: {read_path}')
+    
+    modifier = args.case
+    split_attribute = to_split[modifier]
+
+    read_path = os.path.join(config.DATA_PROCESSED_PATH, f'{modifier}_poses.pkl')
+    df = pd.read_pickle(read_path)
+    split_df = split_data(df, split_attribute)
+    split_df.to_pickle(read_path)
+    print(f'Split dataframe written to: {read_path}')
