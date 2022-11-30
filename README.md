@@ -35,13 +35,11 @@ chmod u+x phase_2.sh
 
 For the demonstrations:
 
-(NEED TO UPDATE THIS AFTER DEMO IS SORTED OUT)
-
 - In Deepnote, move the previously generated raw data to `data_raw`.
 
 - Then, make a folder called `data_processed` and put the split dataframes there.
 
-- Then, run `nn_controller_sim_v2` for the respective case in the code.
+- Then, run the respective cells in `not_live_demos.ipynb` for the single circle and different initalization demos.
 
 - Screen record the Meshcat demonstrations.
 
