@@ -39,7 +39,7 @@ For the demonstrations:
 
 - Then, make a folder called `data_processed` and put the split dataframes there.
 
-- Then, run the respective cells in `not_live_demos.ipynb` for the single circle and different initalization demos.
+- Then, run the respective cells in `recorded_demo_diff_init.ipynb` and `recorded_demo_single_circle` for the different initalization and single circle demos.
 
 - Screen record the Meshcat demonstrations.
 
